@@ -53,6 +53,9 @@ class BGrupoEmpresarial(BaseModel):
 	def __str__(self):
 		return self.nombre
 
+	def logoGrupo(self):
+		  return """<img width="100px" height="120px" src="%s" alt="logo del grupo empresarial">""" % self.logo.url
+
 	class Meta:		
 		unique_together = [
 			["nombre","tipo"],
@@ -77,9 +80,31 @@ class CSede(BaseModel):
 	def __str__(self):
 		return self.nombre
 
+	def logoSede(self):
+		  return """<img width="100px" height="120px" src="%s" alt="logo de la sede">""" % self.logo.url
+
 	class Meta:		
 		unique_together = [
 			["nombre"],
 		]
 		db_table = 'infraestructura_sede'
 		verbose_name = 'Sede del grupo empresarial'	
+
+
+@python_2_unicode_compatible
+class DHabitacion(BaseModel):
+	sede = models.ForeignKey(CSede , related_name = 'fk_habitacion_sede',on_delete=models.PROTECT)
+	numero = models.IntegerField()
+	tipo = models.ForeignKey(Tipo , related_name = 'fk_habitacion_tipo',on_delete=models.PROTECT)
+	created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='DHabitacion_created_by')
+	modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='DHabitacion_modified_by')
+
+	def __str__(self):
+		return self.sede.nombre + ' >> ' + self.numero
+
+	class Meta:		
+		unique_together = [
+			["numero"],['sede'],
+		]
+		db_table = 'infraestructura_habitacion'
+		verbose_name = 'habitacion'	

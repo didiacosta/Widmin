@@ -9,10 +9,10 @@ class AdminAPersona(admin.ModelAdmin):
 	list_filter=('genero','tipoIdentificacion')
 
 class AdminBHuesped(admin.ModelAdmin):
-	list_display=('identificacion','persona','fechaEntrada','fechaSalida','acompananteDe',
-		'hospedado','habitacion','created_by','modified_by')
+	list_display=('identificacion','persona','fechaEntrada','fechaSalida','acompananteDe'
+		,'habitacion','created_by','modified_by')
 	search_fields=('habitacion','persona')
-	list_filter=('hospedado', 'fechaEntrada','fechaSalida','created_by')
+	list_filter=('fechaEntrada','fechaSalida','created_by')
 
 
 admin.site.register(APersona,AdminAPersona)

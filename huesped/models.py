@@ -42,8 +42,7 @@ class BHuesped(BaseModel):
 	fechaEntrada = models.DateField()
 	fechaSalida = models.DateField()
 	acompananteDe = models.ForeignKey('self', null=True, blank=True, on_delete=models.PROTECT)
-	hospedado = models.BooleanField()
-	habitacion = models.ForeignKey(DHabitacion , related_name = 'fk_huesped_habitacion',on_delete=models.PROTECT)
+	habitacion = models.IntegerField()
 	created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='BHuesped_created_by')
 	modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='BHuesped_modified_by')
 	history = HistoricalRecords()
@@ -54,9 +53,10 @@ class BHuesped(BaseModel):
 	def identificacion(self):
 		return self.persona.identificacion
 
-	class Meta:		
-		# unique_together = [
-		# 	["identificacion",'tipoIdentificacion'],
-		# ]
+	def save(self):
+		#conexion al microtick
+		pass
+
+	class Meta:
 		db_table = 'huesped_huesped'
 		verbose_name = 'Huesped'

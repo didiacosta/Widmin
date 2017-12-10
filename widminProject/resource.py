@@ -131,9 +131,9 @@ class ApiRos:
             ret += s.decode('UTF-8', 'replace')
         return ret
 
-def main():
+def crearUsuario(usuario,psw,tipo):
     s = None
-    for res in socket.getaddrinfo(sys.argv[1], "8728", socket.AF_UNSPEC, socket.SOCK_STREAM):
+    for res in socket.getaddrinfo("186.83.194.106", "8728", socket.AF_UNSPEC, socket.SOCK_STREAM):
         af, socktype, proto, canonname, sa = res
         try:
              s = socket.socket(af, socktype, proto)
@@ -152,9 +152,9 @@ def main():
         sys.exit(1)
 
     apiros = ApiRos(s);
-    apiros.login(sys.argv[2], sys.argv[3]);
+    apiros.login('admin', 'Unifiwifi2k17');
 
-    inputsentence = []
+    inputsentence = ['ip hotspot user add limit-uptime=1h server=all name=	' + usuario + '	password= ' + psw,]
 
     while 1:
         r = select.select([s, sys.stdin], [], [], None)
@@ -175,5 +175,4 @@ def main():
             else:
                 inputsentence.append(l)
 
-if __name__ == '__main__':
-    main()
+

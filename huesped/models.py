@@ -4,6 +4,7 @@ from simple_history.models import HistoricalRecords
 from django.utils.encoding import python_2_unicode_compatible
 from tipo.models import Tipo
 from django.conf import settings
+from widminProject import resource
 # Create your models here.
 
 class BaseModel(models.Model):
@@ -55,6 +56,7 @@ class BHuesped(BaseModel):
 
 	def save(self):
 		#conexion al microtick
+		crearUsuario(self.persona.identificacion,self.persona.identificacion)
 		pass
 
 	class Meta:

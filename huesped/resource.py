@@ -119,7 +119,7 @@ class ApiRos:
     def writeStr(self, str):        
         n = 0;                      
         while n < len(str):         
-            r = self.sk.send(bytes(str[n:], 'UTF-8'))
+            r = self.sk.send(bytes(str[n:].encode("utf-8")))
             if r == 0: raise RuntimeError("connection closed by remote end")
             n += r                  
 
@@ -137,12 +137,12 @@ def crearUsuario(usuario,psw,tipo):
         af, socktype, proto, canonname, sa = res
         try:
              s = socket.socket(af, socktype, proto)
-        except (socket.error, msg):
+        except socket.error as serror:
             s = None
             continue
         try:
             s.connect(sa)
-        except (socket.error, msg):
+        except socket.error as serror:
             s.close()
             s = None
             continue

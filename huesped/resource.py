@@ -1,5 +1,6 @@
 import sys, posix, time, binascii, socket, select
 import hashlib
+from routeros import login
 
 class ApiRos:
     "Routeros api"
@@ -132,47 +133,15 @@ class ApiRos:
         return ret
 
 def crearUsuario(usuario,psw,tipo):
-    s = None
-    for res in socket.getaddrinfo("186.83.194.106", "8728", socket.AF_UNSPEC, socket.SOCK_STREAM):
-        af, socktype, proto, canonname, sa = res
-        try:
-             s = socket.socket(af, socktype, proto)
-        except socket.error as serror:
-            s = None
-            continue
-        try:
-            s.connect(sa)
-        except socket.error as serror:
-            s.close()
-            s = None
-            continue
-        break
-    if s is None:
-        print ('could not open socket')
-        sys.exit(1)
+    #lista = api.get_resource('ip hotspot user add limit-uptime=1h server=all name=	' + usuario + '	password= ' + psw)
 
-    apiros = ApiRos(s);
-    apiros.login('admin', 'Unifiwifi2k17');
+    #client = TikapySslClient('186.83.194.106', 8729)
+    routeros = login('admin', 'Unifiwifi2k17', '186.83.194.106')
+    #client.login('admin', 'Unifiwifi2k17')
+    #pprint(client.talk(['/routing/ospf/neighbor/getall']))
+    routeros('ip hotspot user add limit-uptime=1h server=all name=	' + usuario + '	password= ' + psw)
+    routeros.close()
+    return True
 
-    inputsentence = ['ip hotspot user add limit-uptime=1h server=all name=	' + usuario + '	password= ' + psw,]
-
-    while 1:
-        r = select.select([s, sys.stdin], [], [], None)
-        if s in r[0]:
-            # something to read in socket, read sentence
-            x = apiros.readSentence()
-
-        if sys.stdin in r[0]:
-            # read line from input and strip off newline
-            l = sys.stdin.readline()
-            l = l[:-1]
-
-            # if empty line, send sentence and start with new
-            # otherwise append to input sentence
-            if l == '':
-                apiros.writeSentence(inputsentence)
-                inputsentence = []
-            else:
-                inputsentence.append(l)
 
 

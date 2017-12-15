@@ -54,10 +54,10 @@ class BHuesped(BaseModel):
 	def identificacion(self):
 		return self.persona.identificacion
 
-	def save(self):
+	def save(self,*args, **kwargs):
 		#conexion al microtick
 		crearUsuario(str(self.persona.identificacion),str(self.persona.identificacion),1)
-		pass
+		super(BHuesped, self).save(*args, **kwargs)
 
 	class Meta:
 		db_table = 'huesped_huesped'

@@ -133,13 +133,12 @@ class ApiRos:
         return ret
 
 def crearUsuario(usuario,psw,tipo):
-    #lista = api.get_resource('ip hotspot user add limit-uptime=1h server=all name=	' + usuario + '	password= ' + psw)
-
     #client = TikapySslClient('186.83.194.106', 8729)
     routeros = login('admin', 'Unifiwifi2k17', '186.83.194.106')
     #client.login('admin', 'Unifiwifi2k17')
     #pprint(client.talk(['/routing/ospf/neighbor/getall']))
-    routeros('ip hotspot user add limit-uptime=1h server=all name=	' + usuario + '	password= ' + psw)
+    sentence = '/ip/hotspot/user/add=profile=default=limit-uptime=8640=comment=hola=name='+usuario+'=password='+psw 
+    routeros(sentence)
     routeros.close()
     return True
 

@@ -9,8 +9,8 @@ from django.utils.encoding import python_2_unicode_compatible
 class BaseModel(models.Model):
 	created_date = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creacion')
 	modified_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de actualizacion')
-	created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='created_by')
-	modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='modified_by')
+	created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='created_by',on_delete=models.PROTECT)
+	modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='modified_by',on_delete=models.PROTECT)
 
 	class Meta:
 		abstract = True

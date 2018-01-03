@@ -4,7 +4,7 @@ from simple_history.models import HistoricalRecords
 from django.utils.encoding import python_2_unicode_compatible
 from tipo.models import Tipo
 from django.conf import settings
-from huesped.resource import crearUsuario
+from huesped.resource import crearUsuario, crearUserHostpost
 # Create your models here.
 
 class BaseModel(models.Model):
@@ -23,8 +23,8 @@ class APersona(BaseModel):
 	apellidos = models.CharField(max_length=100)
 	fechaNacimiento = models.DateField()
 	genero = models.CharField(max_length=1,choices=generos, default=0)
-	created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='APersona_created_by')
-	modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='APersona_modified_by')
+	#created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='APersona_created_by',on_delete=models.PROTECT)
+	#modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='APersona_modified_by',on_delete=models.PROTECT)
 	history = HistoricalRecords()
 
 	def __str__(self):
@@ -43,9 +43,9 @@ class BHuesped(BaseModel):
 	fechaEntrada = models.DateField()
 	fechaSalida = models.DateField()
 	acompananteDe = models.ForeignKey('self', null=True, blank=True, on_delete=models.PROTECT)
-	habitacion = models.IntegerField()
-	created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='BHuesped_created_by')
-	modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='BHuesped_modified_by')
+	habitacion = models.CharField(max_length=50, null=True,blank=True)
+	#created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='BHuesped_created_by',on_delete=models.PROTECT)
+	#modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='BHuesped_modified_by',on_delete=models.PROTECT)
 	history = HistoricalRecords()
 
 	def __str__(self):
@@ -56,7 +56,7 @@ class BHuesped(BaseModel):
 
 	def save(self,*args, **kwargs):
 		#conexion al microtick
-		crearUsuario(str(self.persona.identificacion),str(self.persona.identificacion),1)
+		crearUserHostpost(str(self.persona.identificacion),str(self.persona.identificacion),1)
 		super(BHuesped, self).save(*args, **kwargs)
 
 	class Meta:

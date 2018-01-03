@@ -142,5 +142,34 @@ def crearUsuario(usuario,psw,tipo):
     routeros.close()
     return True
 
+def crearUserHostpost(usuario,psw,tipo):
+    s = None
+    for res in socket.getaddrinfo("186.83.194.106", "8728", socket.AF_UNSPEC, socket.SOCK_STREAM):
+        af, socktype, proto, canonname, sa = res
+        try:
+             s = socket.socket(af, socktype, proto)
+        except socket.error as serror:
+            s = None
+            continue
+        try:
+            s.connect(sa)
+        except socket.error as serror:
+            s.close()
+            s = None
+            continue
+        break
+    if s is None:
+        print ('could not open socket')
+        sys.exit(1)
+
+    apiros = ApiRos(s);
+    apiros.login('admin', 'Unifiwifi2k17');
+    #escribo el comando
+    apiros.talk(["/ip/hotspot/user/add","=profile=default", "=limit-uptime=8640", 
+    "=name="+usuario,'=password='+psw])
+
+    return True
+    
+
 
 

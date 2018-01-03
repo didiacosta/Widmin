@@ -3,16 +3,15 @@ from .models import APersona, BHuesped
 # Register your models here.
 
 class AdminAPersona(admin.ModelAdmin):
-	list_display=('identificacion','tipoIdentificacion','nombres','apellidos','fechaNacimiento','genero',
-		'created_by','modified_by')
+	list_display=('identificacion','tipoIdentificacion','nombres','apellidos','fechaNacimiento','genero')
 	search_fields=('nombres','apellidos','identificacion')
 	list_filter=('genero','tipoIdentificacion')
 
 class AdminBHuesped(admin.ModelAdmin):
 	list_display=('identificacion','persona','fechaEntrada','fechaSalida','acompananteDe'
-		,'habitacion','created_by','modified_by')
+		,'habitacion')
 	search_fields=('habitacion','persona')
-	list_filter=('fechaEntrada','fechaSalida','created_by')
+	list_filter=('fechaEntrada','fechaSalida')
 
 
 admin.site.register(APersona,AdminAPersona)

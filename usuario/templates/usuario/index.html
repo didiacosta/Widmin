@@ -1,0 +1,15 @@
+{% extends 'page.html' %}
+
+{% block title %}Home{% endblock title %}
+{% load staticfiles %}
+
+{% block contenido %}
+	<div class="col-md-10">
+	    <div class="span7 alert alert-info">
+	         <i class="fa fa-info-circle fa-2x"></i> Bienvenido al sistema de administraci&oacute;n de WIFI Sr.(a) <b>{{ user.usuario.nombres}} {{user.usuario.apellidos}}</b>. <br>Creaci&oacute;n del usuario: {{ user.date_joined}}.<br>
+	         {% if not user.last_login == null %}
+	         	Ultima entrada: {{ user.last_login }}.
+	         {% endif %}	
+	    </div>
+	</div>
+{% endblock contenido %}

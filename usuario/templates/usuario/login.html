@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Ingreso al sistema{% endblock title %}
+
+{% block contenido %}
+
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="login-wrapper">
+			        <div class="box">
+			            <div class="content-wrap">
+
+			                <form action="#" method="post">
+			                	<h6>Ingreso al sistema</h6>
+			                	{% csrf_token %}
+					            {% if mensaje %}
+					                <div class="alert alert-danger">
+					                    <i class="fa fa-warning"></i>
+					                    {{ mensaje }}
+					                </div>
+					            {% endif %}
+					            <input class="form-control" id="username" name="username" value="{{ username }}"
+					             type="text" placeholder="Usuario">
+					             <input class="form-control" id="password" name="password" value="" 
+					             type="password" placeholder="Clave">
+					  			<div class="action">
+			                		<button type="submit" class="btn btn-primary signup">Ingresar </button>
+			                	</div>  
+			                </form>
+			                
+			                
+              
+			            </div>
+			        </div>
+
+			    </div>
+			</div>
+		</div>
+
+{% endblock contenido %}
+
+{% block footer %}
+{% endblock footer %}

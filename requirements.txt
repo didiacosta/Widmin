@@ -6,3 +6,5 @@ mysqlclient==1.3.12
 olefile==0.44
 Pillow==4.3.0
 pytz==2017.3
+tikapy==0.2.1
+chainmap==1.0.2

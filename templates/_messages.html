@@ -1,0 +1,20 @@
+{% if messages %}
+    
+    
+        <div class="col-lg-6 col-off-set-3">
+            
+            
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                <div class="alert alert-danger" role="alert"> <i class="fa fa-warning fa-2x"></i>
+                {% else %}
+                <div class="alert alert-success" role="alert"><i class="fa fa-info-circle fa-2x"></i> 
+                {% endif %}
+                    {{ message }}<button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+            {% endfor %}
+           
+        </div>
+  
+   
+{% endif %}

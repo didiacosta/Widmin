@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load staticfiles %}
+    <!-- Bootstrap -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- styles -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome-4.6.3/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  	<div class="header">
+	     <div class="container">
+	        <div class="row">
+	           <div class="col-md-4">
+	           		{% block logo %}
+	              <!-- Logo -->
+	              <div class="logo">
+	                 <h1><a href="{{ LOGIN_URL }}">WIDMIN</a></h1>
+	              </div>
+	              {% endblock logo %}
+	           </div>
+	           
+	           
+	           <div class="col-md-4">
+	           		{% block buscar%}
+		            {% endblock buscar %}
+	           </div>
+	           
+	           <div class="col-md-4">
+	           		{% block miCuenta %}
+	                {% endblock miCuenta %}
+	           </div>
+	        </div>
+	     </div>
+	</div>
+
+    <div class="page-content">
+    	<div class="row">
+    		{% block menu %}
+    		{% endblock menu %}
+    		{% block contenido %}{% endblock contenido %}
+    	</div>
+    	
+    </div>	
+
+    {% block footer %}
+    <footer>
+         <div class="container">
+         
+            <div class="copy text-center">
+               Copyright 2014 <a href='#'>Website</a>
+            </div>
+            
+         </div>
+      </footer>
+    {% endblock footer %}
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+  </body>
+</html>

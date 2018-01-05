@@ -1,4 +1,4 @@
-import sys, posix, time, binascii, socket, select
+import sys, os, time, binascii, socket, select
 import hashlib
 from routeros import login
 

@@ -25,8 +25,10 @@
 	           <div class="col-md-4">
 	           		{% block logo %}
 	              <!-- Logo -->
+
 	              <div class="logo">
-	                 <h1><a href="{{ LOGIN_URL }}">WIDMIN</a></h1>
+
+	                 <h1><a href="{% url 'usuario.index' %}">WIDMIN | {{user.usuario.grupoEmpresarial}}</a></h1>
 	              </div>
 	              {% endblock logo %}
 	           </div>

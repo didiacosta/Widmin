@@ -23,6 +23,7 @@ class APersona(BaseModel):
 	apellidos = models.CharField(max_length=100)
 	fechaNacimiento = models.DateField()
 	genero = models.CharField(max_length=1,choices=generos, default=0)
+	
 	#created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='APersona_created_by',on_delete=models.PROTECT)
 	#modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='APersona_modified_by',on_delete=models.PROTECT)
 	history = HistoricalRecords()

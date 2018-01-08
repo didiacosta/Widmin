@@ -1,0 +1,32 @@
+{% extends 'page.html' %}
+
+{% block title %}Sedes{% endblock title %}
+{% load staticfiles %}
+
+{% block contenido %}
+	<div class="col-md-10">
+		<div class="col-md-12">
+			<div class="content-box-header">
+	  			<div class="panel-title"><h3>Sedes del grupo empresarial actual</h3></div>
+		  	</div>
+		  	<div class="content-box-large box-with-header">
+				  {% if request.GET.numero %}
+    				<h2>Resultados encontrados para "{{ request.GET.textoBusqueda }}":</h2>
+ 				  {% endif %}
+ 				  {% if object_list %}
+ 				  	<!--Mostrar datos consultados en el view-->
+ 				  	
+ 				  {% else %}
+ 				  	<div class="alert alert-warning">
+        				<i class="fa fa-warning fa-2x"></i> No se encontraron datos para mostrar.
+            		</div>
+ 				  {% endif %}				
+					  			
+				<br /><br />
+			</div>
+		</div>
+	</div>
+{% endblock contenido %}
+
+{% block footer %}
+{% endblock footer %}

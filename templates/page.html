@@ -19,7 +19,7 @@
 	                      <li class="dropdown">
 	                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.usuario.nombres }} {{ user.usuario.apellidos}} <b class="caret"></b></a>
 	                        <ul class="dropdown-menu animated fadeInUp">
-	                          <li><a href="profile.html">Profile</a></li>
+	                          <li><a href="#"># Mi perfil</a></li>
 	                          <li><a href="{% url 'usuario.logout' %}">Cerrar Sesion</a></li>
 	                        </ul>
 	                      </li>
@@ -32,24 +32,25 @@
 			  	<div class="sidebar content-box" style="display: block;">
 	                <ul class="nav">
 	                    <!-- Main menu -->
-	                    <li class="current"><a href="index.html"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
-	                    <li><a href="calendar.html"><i class="glyphicon glyphicon-calendar"></i> Calendar</a></li>
-	                    <li><a href="stats.html"><i class="glyphicon glyphicon-stats"></i> Statistics (Charts)</a></li>
-	                    <li><a href="tables.html"><i class="glyphicon glyphicon-list"></i> Tables</a></li>
-	                    <li><a href="buttons.html"><i class="glyphicon glyphicon-record"></i> Buttons</a></li>
-	                    <li><a href="editors.html"><i class="glyphicon glyphicon-pencil"></i> Editors</a></li>
-	                    <li><a href="forms.html"><i class="glyphicon glyphicon-tasks"></i> Forms</a></li>
+	                    <li class="current"><a href="{% url 'usuario.index' %}"><i class="fa fa-home fa-2x"></i> Inicio</a></li>
+	                    <li><a href="calendar.html"><i class="fa fa-user fa-2x"></i> Huesped</a></li>
+	                    
+	                    {% if 'infraestructura.Grupo_empresarial.Can_change_Grupo_empresarial' in perms %}
 	                    <li class="submenu">
 	                         <a href="#">
-	                            <i class="glyphicon glyphicon-list"></i> Pages
+	                            <i class="fa fa-wrench fa-2x"></i> Configuración
 	                            <span class="caret pull-right"></span>
 	                         </a>
 	                         <!-- Sub menu -->
 	                         <ul>
-	                            <li><a href="login.html">Login</a></li>
-	                            <li><a href="signup.html">Signup</a></li>
+	                            <li><a href="{% url 'infraestructura.sedes' %}"><i class="fa fa-university fa-2x"></i> Sede</a></li>
+	                             <li><a href="#"><i class="fa fa-bed fa-2x"></i> Habitación</a></li>
+	                             <li><a href="#"><i class="fa fa-group fa-2x"></i> Usuarios</a></li>
+	                             <li><a href="#"><i class="fa fa-bar-chart fa-2x"></i> Reportes</a></li>
+
 	                        </ul>
 	                    </li>
+	                    {% endif %}
 	                </ul>
 	             </div>
 			  </div>

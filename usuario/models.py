@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from infraestructura.models import BGrupoEmpresarial
 # Create your models here.
 
 class BaseModel(models.Model):
@@ -12,6 +13,7 @@ class BaseModel(models.Model):
 class Usuario(BaseModel):
 	user = models.OneToOneField(settings.AUTH_USER_MODEL)
 	telefono=models.CharField(null=True, max_length=100)
+	grupoEmpresarial = models.ForeignKey(BGrupoEmpresarial, related_name='GrupoEmpresarial_usuario', null=True)
 	created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='Usuario_created_by')
 	modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='Usuario_modified_by')
 

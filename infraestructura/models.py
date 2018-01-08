@@ -41,9 +41,6 @@ class BGrupoEmpresarial(BaseModel):
 	nombre = models.CharField(max_length=150)
 	tipo = models.ForeignKey(Tipo , related_name = 'fk_infraestructura_tipo',on_delete=models.PROTECT)
 	logo = models.ImageField(upload_to='logos',blank=True, null=True, default='logos/defaultGrupoEmpresarial.jpg')
-	usuarios = models.ManyToManyField(settings.AUTH_USER_MODEL, 
-		related_name='fk_grupoempresarial_usuarios' , 
-		verbose_name='Usuarios que pueden ver las sedes del grupo empresarial')
 	equipoControlador = models.ForeignKey(AequipoControlador , 
 		related_name = 'fk_grupoEmpresarial_equipoControlador',on_delete=models.PROTECT)
 	history = HistoricalRecords()
@@ -55,6 +52,8 @@ class BGrupoEmpresarial(BaseModel):
 
 	def logoGrupo(self):
 		  return """<img width="100px" height="120px" src="%s" alt="logo del grupo empresarial">""" % self.logo.url
+
+	logoGrupo.allow_tags=True
 
 	class Meta:		
 		unique_together = [
@@ -94,7 +93,7 @@ class CSede(BaseModel):
 @python_2_unicode_compatible
 class DHabitacion(BaseModel):
 	sede = models.ForeignKey(CSede , related_name = 'fk_habitacion_sede',on_delete=models.PROTECT)
-	numero = models.IntegerField()
+	numero = models.CharField(max_length=50)
 	tipo = models.ForeignKey(Tipo , related_name = 'fk_habitacion_tipo',on_delete=models.PROTECT)
 	created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='DHabitacion_created_by')
 	modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='DHabitacion_modified_by')
